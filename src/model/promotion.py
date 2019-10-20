@@ -24,6 +24,17 @@ class Promotion:
         self.__collection().insert(self.__to_db_document())
         return self
 
+    def update(self):
+        document = self.__to_db_document()
+        query = {'_id': document.pop('_id')}
+        self.__collection().find_one_and_update(filter=query, update={'$set': document})
+        return self
+
+    @classmethod
+    def find(cls, promotion_id):
+        document = cls.__collection().find_one({'_id': promotion_id})
+        return None if not document else cls.__from_db_document(document)
+
     @classmethod
     def find_all(cls):
         return [cls.__from_db_document(document) for document in cls.__collection().find({})]
