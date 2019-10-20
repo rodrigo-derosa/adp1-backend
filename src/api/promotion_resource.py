@@ -14,7 +14,7 @@ class PromotionResource(Resource):
     def post():
         Promotion()\
             .with_promotion_id(request.json.get('promotion_id'))\
-            .with_products(request.json.get('products'))\
+            .with_description(request.json.get('description'))\
             .with_price(request.json.get('price'))\
             .store()
 

@@ -5,15 +5,15 @@ class Promotion:
 
     def __init__(self):
         self.__promotion_id = None
-        self.__products = None
+        self.__description = None
         self.__price = None
 
     def with_promotion_id(self, promotion_id: str):
         self.__promotion_id = promotion_id
         return self
 
-    def with_products(self, products: list):
-        self.__products = products
+    def with_description(self, description: str):
+        self.__description = description
         return self
 
     def with_price(self, price: float):
@@ -35,7 +35,7 @@ class Promotion:
     def __to_db_document(self):
         return {
             '_id': self.__promotion_id,
-            'products': self.__products,
+            'products': self.__description,
             'price': self.__price
         }
 
@@ -43,7 +43,7 @@ class Promotion:
     def __from_db_document(cls, document):
         return Promotion()\
             .with_promotion_id(document.get('_id'))\
-            .with_products(document.get('products'))\
+            .with_description(document.get('description'))\
             .with_price(document.get('price'))
 
     @classmethod
